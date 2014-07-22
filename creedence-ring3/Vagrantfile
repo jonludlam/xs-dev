@@ -1,0 +1,27 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+$script = <<SCRIPT
+echo I am provisioning...
+date > /etc/vagrant_provisioned_at
+SCRIPT
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.provider :xenserver do |xs|
+    xs.memory = 4096
+  end
+
+  config.vm.define "dev" do |dev|
+    dev.vm.box = "jonludlam/xs-centos-5.10"
+    dev.vm.provision "shell", path: "dev_provision.sh"
+  end
+
+  config.vm.define "test" do |test|
+    test.vm.box_check_update = true
+    test.vm.box = "jonludlam/xs-creedence-ring3"
+    test.vm.provision "shell", path: "test_provision.sh"
+  end
+end
