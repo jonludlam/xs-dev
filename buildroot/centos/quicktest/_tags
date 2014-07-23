@@ -1,0 +1,58 @@
+# OASIS_START
+# DO NOT EDIT (digest: d83f4a01dd70bc6a0d383eb6b6c4c2e0)
+# Ignore VCS directories, you can use the same kind of rule outside
+# OASIS_START/STOP if you want to exclude directories that contains
+# useless stuff for the build process
+<**/.svn>: -traverse
+<**/.svn>: not_hygienic
+".bzr": -traverse
+".bzr": not_hygienic
+".hg": -traverse
+".hg": not_hygienic
+".git": -traverse
+".git": not_hygienic
+"_darcs": -traverse
+"_darcs": not_hygienic
+# Executable client
+<src/quicktest.{native,byte}>: pkg_cmdliner
+<src/quicktest.{native,byte}>: pkg_io-page
+<src/quicktest.{native,byte}>: pkg_io-page.unix
+<src/quicktest.{native,byte}>: pkg_lwt
+<src/quicktest.{native,byte}>: pkg_mirage-types.lwt
+<src/quicktest.{native,byte}>: pkg_testvmlib
+<src/quicktest.{native,byte}>: pkg_vchan
+<src/quicktest.{native,byte}>: pkg_xen-api-client
+<src/quicktest.{native,byte}>: pkg_xen-api-client.lwt
+<src/quicktest.{native,byte}>: pkg_xen-evtchn
+<src/quicktest.{native,byte}>: pkg_xen-evtchn.unix
+<src/quicktest.{native,byte}>: pkg_xen-evtchn.unix.activations
+<src/quicktest.{native,byte}>: pkg_xen-gnt
+<src/quicktest.{native,byte}>: pkg_xen-gnt.unix
+<src/quicktest.{native,byte}>: pkg_xenstore
+<src/quicktest.{native,byte}>: pkg_xenstore.client
+<src/quicktest.{native,byte}>: pkg_xenstore_transport
+<src/quicktest.{native,byte}>: pkg_xenstore_transport.lwt
+<src/*.ml{,i}>: pkg_cmdliner
+<src/*.ml{,i}>: pkg_io-page
+<src/*.ml{,i}>: pkg_io-page.unix
+<src/*.ml{,i}>: pkg_lwt
+<src/*.ml{,i}>: pkg_mirage-types.lwt
+<src/*.ml{,i}>: pkg_testvmlib
+<src/*.ml{,i}>: pkg_vchan
+<src/*.ml{,i}>: pkg_xen-api-client
+<src/*.ml{,i}>: pkg_xen-api-client.lwt
+<src/*.ml{,i}>: pkg_xen-evtchn
+<src/*.ml{,i}>: pkg_xen-evtchn.unix
+<src/*.ml{,i}>: pkg_xen-evtchn.unix.activations
+<src/*.ml{,i}>: pkg_xen-gnt
+<src/*.ml{,i}>: pkg_xen-gnt.unix
+<src/*.ml{,i}>: pkg_xenstore
+<src/*.ml{,i}>: pkg_xenstore.client
+<src/*.ml{,i}>: pkg_xenstore_transport
+<src/*.ml{,i}>: pkg_xenstore_transport.lwt
+# OASIS_STOP
+<*/*>: syntax_camlp4o
+<*.ml>: syntax_camlp4o
+<*/*>: pkg_lwt.syntax
+<*.ml>: pkg_lwt.syntax
+<*.ml>: pkg_rpclib.syntax

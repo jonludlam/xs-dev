@@ -1,0 +1,16 @@
+OASISFormat: 0.2
+Name:        quicktest
+Version:     0.1
+Synopsis:    Test VM driver
+Authors:     Jon Ludlam
+License:     LGPL-2.1 with OCaml linking exception
+Plugins:     META (0.2)
+BuildTools:  ocamlbuild
+
+Executable client
+  CompiledObject: best
+  Path: src
+  MainIs: quicktest.ml
+  BuildDepends: cmdliner, io-page.unix, io-page, xen-evtchn, xen-evtchn.unix, xen-evtchn.unix.activations, xen-gnt.unix, xen-gnt, xenstore, xenstore.client, xenstore_transport, xenstore_transport.lwt, lwt, mirage-types.lwt, vchan, testvmlib, xen-api-client, xen-api-client.lwt
+
+
