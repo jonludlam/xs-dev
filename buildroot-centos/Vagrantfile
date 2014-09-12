@@ -4,14 +4,9 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
-$script = <<SCRIPT
-echo I am provisioning...
-date > /etc/vagrant_provisioned_at
-SCRIPT
-
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder ".", "/vagrant", type: "nfs"
-  config.vm.synced_folder "../repos", "/repos", type:"nfs", mount_options: ['rw', 'vers=4', 'tcp', 'fsc', 'rsize=8192', 'wsize=8192', 'noatime']
+  config.vm.synced_folder "../repos", "/repos", type: "nfs"
 
   config.vm.provider :xenserver do |xs|
     xs.memory = 4096
@@ -21,14 +16,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     dev.vm.box = "jonludlam/xs-centos-6.5"
     dev.vm.provision "shell", path: "dev_provision.sh"
     dev.vm.provision "file", source: "~/.gitconfig", destination: "~/.gitconfig"
+    dev.vm.synced_folder "../repos", "/repos", type: "nfs", mount_options: ['rw', 'vers=4', 'tcp', 'fsc', 'rsize=8192', 'wsize=8192']
+
     dev.vm.provider :xenserver do |xs|
-	xs.pv = true
+        xs.pv = true
     end
   end
 
   config.vm.define "test" do |test|
-    test.vm.box_check_update = true
-    test.vm.box = "jonludlam/xs-trunk-ring3"
-#    test.vm.provision "shell", path: "test_provision.sh"
+    test.vm.box = "jonludlam/xs-centos-6.5"
+    test.vm.provision "shell", path: "test_provision.sh"
   end
+
 end

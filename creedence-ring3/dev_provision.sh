@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sudo yum clean all
 sudo rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm
 sudo yum clean all
 sudo yum update -y

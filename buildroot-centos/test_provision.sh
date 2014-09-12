@@ -1,5 +1,5 @@
 #!/bin/bash
-
+exit 0
 rpm -ivh http://mirror.ancl.hawaii.edu/linux/epel/6/i386/epel-release-6-8.noarch.rpm
 
 cat > /etc/yum.repos.d/buildroot.repo << EOF

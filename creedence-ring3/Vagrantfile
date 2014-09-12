@@ -10,6 +10,9 @@ date > /etc/vagrant_provisioned_at
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.synced_folder ".", "/vagrant", type: "nfs"
+  config.vm.synced_folder "../repos", "/repos", type: "nfs"
+
   config.vm.provider :xenserver do |xs|
     xs.memory = 4096
   end
@@ -17,6 +20,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "dev" do |dev|
     dev.vm.box = "jonludlam/xs-centos-5.10"
     dev.vm.provision "shell", path: "dev_provision.sh"
+    dev.vm.provision "file", source: "~/.gitconfig", destination: "~/.gitconfig"
+    dev.vm.synced_folder "../repos", "/repos", type: "nfs", mount_options: ['rw', 'tcp', 'rsize=8192', 'wsize=8192']
   end
 
   config.vm.define "test" do |test|
