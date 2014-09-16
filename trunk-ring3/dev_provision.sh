@@ -152,4 +152,6 @@ yum install -y \
     ocaml-cmdliner \
     ocaml-cmdliner-devel \
     ocaml-stringext-devel \
+    ocaml-gnt-devel \
+    ocaml-rrdd-plugin-devel \
 
