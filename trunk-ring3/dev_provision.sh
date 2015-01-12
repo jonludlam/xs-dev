@@ -154,4 +154,5 @@ yum install -y \
     ocaml-stringext-devel \
     ocaml-gnt-devel \
     ocaml-rrdd-plugin-devel \
+    opam \
 
