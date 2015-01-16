@@ -155,4 +155,5 @@ yum install -y \
     ocaml-gnt-devel \
     ocaml-rrdd-plugin-devel \
     opam \
+    vim-enhanced \
 
