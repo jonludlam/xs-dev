@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rpm -ivh http://mirror.ancl.hawaii.edu/linux/epel/6/i386/epel-release-6-8.noarch.rpm
+rpm -ivh http://www.mirrorservice.org/sites/dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
 
 cat > /etc/yum.repos.d/ring3.repo << EOF
 [ring3]
@@ -8,6 +8,7 @@ name=ring3
 enabled=1
 baseurl=http://www.uk.xensource.com/yum-trunk-ring3
 gpgcheck=0
+exclude=xenserver-release* kernel*
 EOF
 echo I am provisioning...
 
