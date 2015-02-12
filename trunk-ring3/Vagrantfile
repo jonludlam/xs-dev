@@ -21,7 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     dev.vm.box = "jonludlam/xs-centos-7"
     dev.vm.provision "shell", path: "dev_provision.sh"
     dev.vm.provision "file", source: "~/.gitconfig", destination: "~/.gitconfig"
-    dev.vm.provision "shell", inline: "hostname vg-tr3-dev"
+    dev.vm.provision "shell", inline: "hostname vg-tr3-dev; echo vg-tr3-dev > /etc/hostname"
     dev.vm.provider :xenserver do |xs|
 	xs.pv = true
     end
@@ -30,7 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "test" do |test|
     test.vm.box_check_update = true
     test.vm.box = "jonludlam/xs-trunk-ring3"
-    test.vm.provision "shell", inline: "hostname vg-tr3-test"
+    test.vm.provision "shell", inline: "hostname vg-tr3-test; echo vg-tr3-test > /etc/hostname"
 #    test.vm.provision "shell", path: "test_provision.sh"
   end
 end
