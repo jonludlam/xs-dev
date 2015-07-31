@@ -10,8 +10,8 @@ date > /etc/vagrant_provisioned_at
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.synced_folder ".", "/vagrant", type: "nfs"
-  config.vm.synced_folder "../repos", "/repos", type:"nfs", mount_options: ['rw', 'vers=4', 'tcp', 'fsc', 'rsize=8192', 'wsize=8192', 'noatime']
+  config.vm.synced_folder ".", "/vagrant", type: "rsync"
+#  config.vm.synced_folder "../repos", "/repos", type:"nfs", mount_options: ['rw', 'vers=4', 'tcp', 'fsc', 'rsize=8192', 'wsize=8192', 'noatime']
 
   config.vm.provider :xenserver do |xs|
     xs.memory = 4096
@@ -19,12 +19,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "dev" do |dev|
     dev.vm.box = "jonludlam/xs-centos-7"
-    dev.vm.provision "shell", path: "dev_provision.sh"
     dev.vm.provision "file", source: "~/.gitconfig", destination: "~/.gitconfig"
     dev.vm.provision "shell", inline: "hostname vg-tr3-dev; echo vg-tr3-dev > /etc/hostname"
-    dev.vm.provider :xenserver do |xs|
-	xs.pv = true
-    end
+    dev.vm.provision "file", source: "Citrix.repo.in", destination: "~/Citrix.repo.in"
+    dev.vm.provision "file", source: "RPM-GPG-KEY-Citrix-6.6", destination: "~/RPM-GPG-KEY-Citrix-6.6"
+    dev.vm.provision "file", source: "RPM-GPG-KEY-EPEL-7", destination: "~/RPM-GPG-KEY-EPEL-7"
+    dev.vm.provision "file", source: "CentOS-Base.repo", destination: "~/CentOS-Base.repo"
+    dev.vm.provision "shell", path: "dev_provision.sh"
+
+    dev.vm.network "public_network", bridge: "xenbr0"
+#    dev.vm.provider :xenserver do |xs|
+#	xs.pv = true
+#    end
   end
 
   config.vm.define "test" do |test|
